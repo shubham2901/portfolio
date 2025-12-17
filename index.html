@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Manager Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- Ionicons for icons -->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</head>
+
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <ul class="nav-links">
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#experience" class="nav-link">Experience</a></li>
+                <li><a href="#case-studies" class="nav-link">Case Studies</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="hero">
+            <canvas id="hero-particles"></canvas>
+            <div class="container hero-content">
+                <h1 class="hero-title">SHUBHAM GATKAL</h1>
+                <h2 class="hero-subtitle text-gradient">Senior Product Manager | AI/ML • B2C • Enterprise SaaS</h2>
+                <div class="hero-education">IIM Calcutta MBA | Ex-Microsoft </div>
+                <p class="hero-tagline">Building AI-powered products at scale, from 0-to-1 products to 250M+ MAU
+                    platforms.</p>
+                <div class="hero-buttons">
+                    <a href="#experience" class="btn btn-primary">
+                        View Experience
+                        <ion-icon name="arrow-down-outline"></ion-icon>
+                    </a>
+                    <a href="https://www.linkedin.com/in/shubham-gatkal" target="_blank" class="btn btn-icon-only">
+                        <ion-icon name="logo-linkedin"></ion-icon>
+                    </a>
+                    <a href="mailto:shubhamgatkal2901@gmail.com" class="btn btn-icon-only">
+                        <ion-icon name="mail-outline"></ion-icon>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="section">
+            <div class="container">
+                <div class="about-grid">
+                    <div class="about-text">
+                        <h2 class="section-title">About Me</h2>
+                        <p>I am a Product Manager with a strong engineering foundation and business acumen from IIM
+                            Calcutta. My journey has taken me from building scalable financial systems at Barclays to
+                            driving enterprise search innovation at Microsoft, and now revolutionizing EdTech at Allen.
+                        </p>
+                        <p>I specialize in bridging the gap between cutting-edge AI technologies and user needs. Whether
+                            it's deploying Edge Inferencing models to 250M users or building 0-to-1 multimodal learning
+                            platforms, I focus on delivering measurable impact.</p>
+
+                    </div>
+                    <div class="about-image">
+                        <!-- Placeholder for professional image -->
+                        <img src="./shubham_gatkal.png" alt="Shubham Gatkal"
+                            style="width:100%; height:100%; object-fit:cover; border-radius: 20px;">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Timeline Section -->
+        <section id="experience" class="section timeline-section">
+            <div class="container">
+                <h2 class="section-title" style="text-align: center; margin-bottom: 4rem;">Experience & Impact</h2>
+
+                <div class="timeline-container">
+                    <div class="timeline-line">
+                        <div class="timeline-progress" id="timeline-progress"></div>
+                    </div>
+
+                    <!-- Card 1: Allen -->
+                    <article class="timeline-card-wrapper right" style="--card-accent: var(--color-accent-allen);">
+                        <div class="timeline-node">
+                            <img src="./allen_logo.svg" alt="Allen Logo" class="node-img">
+                        </div>
+                        <div class="company-card">
+                            <div class="card-header">
+                                <h3>Allen</h3>
+                                <h4>Senior Product Manager | 2023 - Present</h4>
+                            </div>
+
+                            <div class="impact-box">
+                                <div class="stat-item">
+                                    <span class="stat-value" data-target="5" data-suffix="M">0</span>
+                                    <span class="stat-label">MAU</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-value" data-target="$5" data-suffix="Mn ">0</span>
+                                    <span class="stat-label">Revenue</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-value" data-target="36" data-suffix="%">0</span>
+                                    <span class="stat-label">Retention Lift</span>
+                                </div>
+                            </div>
+
+                            <div class="accordion">
+                                <div class="accordion-item">
+                                    <button class="accordion-header">
+                                        Key Initiatives
+                                        <ion-icon name="chevron-down-outline" class="accordion-icon"></ion-icon>
+                                    </button>
+                                    <div class="accordion-content">
+                                        <div class="accordion-body">
+                                            <ul
+                                                style="list-style: disc; padding-left: 1.2rem; display: flex; flex-direction: column; gap: 0.5rem;">
+                                                <li><strong>0-to-1 Launch:</strong> Online Class Platform
+                                                    scaling to 1Mn MAU.</li>
+                                                <li><strong>AI Proctoring:</strong> Built Vision model to catch
+                                                    suspicious activity
+                                                    to increase trust.</li>
+                                                <li><strong>Multimodal Eval:</strong> Automated homework grading with
+                                                    LLMs. Reduced time to grade by 80%.</li>
+                                                <li><strong>Vision Models:</strong> In-class attentiveness tracking
+                                                    using Google MediaPipe.</li>
+                                                <li><strong>HTML Whiteboard:</strong> Built inhouse whiteboard
+                                                    to reduce data consumption by 80%.<strong>Patent Pending</strong>
+                                                </li>
+                                                <li><strong>B2B Onboarding:</strong> Onboarded 500+ B2B partner schools
+                                                    for online classes and test series.<strong>100Cr ARR</strong></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="skills-tags">
+                                <span class="tag-pill">AI/ML</span>
+                                <span class="tag-pill">LLMs</span>
+                                <span class="tag-pill">Computer Vision</span>
+                                <span class="tag-pill">0-1 Launch</span>
+                                <span class="tag-pill">EdTech</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Card 2: Microsoft -->
+                    <article class="timeline-card-wrapper left" style="--card-accent: var(--color-accent-microsoft);">
+                        <div class="timeline-node">
+                            <img src="./microsoft_logo.svg" alt="Microsoft Logo" class="node-img">
+                        </div>
+                        <div class="company-card">
+                            <div class="card-header">
+                                <h3>Microsoft</h3>
+                                <h4>Product Manager 2 | 2021 - 2023</h4>
+                            </div>
+
+                            <div class="impact-box">
+                                <div class="stat-item">
+                                    <span class="stat-value" data-target="250" data-suffix="M">0</span>
+                                    <span class="stat-label">MAU</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-value" data-target="2" data-suffix="%">0</span>
+                                    <span class="stat-label">Search Success Increase</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-value" data-target="25" data-suffix="M">0</span>
+                                    <span class="stat-label">New Adoption</span>
+                                </div>
+                            </div>
+
+                            <div class="accordion">
+                                <div class="accordion-item">
+                                    <button class="accordion-header">
+                                        Key Initiatives
+                                        <ion-icon name="chevron-down-outline" class="accordion-icon"></ion-icon>
+                                    </button>
+                                    <div class="accordion-content">
+                                        <div class="accordion-body">
+                                            <ul
+                                                style="list-style: disc; padding-left: 1.2rem; display: flex; flex-direction: column; gap: 0.5rem;">
+                                                <li><strong>Search Success:</strong> Improved ranking for Outlook,
+                                                    Teams, and Edge using user history.</li>
+                                                <li><strong>B2B Evangelization:</strong> Led outreach to 50K+ developers
+                                                    for Embedded Search.</li>
+                                                <li><strong>Edge Inferencing:</strong> Deployed ONNX models to 250M
+                                                    devices, reducing latency from 300ms to 60ms.</li>
+
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="skills-tags">
+                                <span class="tag-pill">Machine Learning</span>
+                                <span class="tag-pill">Search and Recommendation</span>
+                                <span class="tag-pill">B2B SaaS</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Card 3: IIM Calcutta -->
+                    <article class="timeline-card-wrapper right" style="--card-accent: var(--color-accent-iim);">
+                        <div class="timeline-node">
+                            <img src="./iimc_logo.svg" alt="IIM Logo" class="node-img">
+                        </div>
+                        <div class="company-card">
+                            <div class="card-header" style="margin-bottom: 0;">
+                                <h3>IIM Calcutta</h3>
+                                <h4>MBA | 2019 - 2021</h4>
+                                <p style="font-size: 0.95rem; color: var(--color-text-muted); margin-top: 0.5rem;">
+                                    Transitioned from Engineering to Product Management.</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Card 4: Barclays -->
+                    <article class="timeline-card-wrapper left" style="--card-accent: var(--color-accent-barclays);">
+                        <div class="timeline-node">
+                            <img src="./barclays_logo.png" alt="Barclays Logo" class="node-img">
+                        </div>
+                        <div class="company-card">
+                            <div class="card-header">
+                                <h3>Barclays</h3>
+                                <h4>Software Developer | 2017 - 2019</h4>
+                            </div>
+
+                            <div class="impact-box">
+                                <div class="stat-item">
+                                    <span class="stat-value" data-target="25" data-suffix="%">0</span>
+                                    <span class="stat-label">Cost Reduced</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-value" data-target="190" data-suffix="h">0</span>
+                                    <span class="stat-label">Hours Saved per week</span>
+                                </div>
+                            </div>
+
+                            <div class="accordion">
+                                <div class="accordion-item">
+                                    <button class="accordion-header">
+                                        Projects
+                                        <ion-icon name="chevron-down-outline" class="accordion-icon"></ion-icon>
+                                    </button>
+                                    <div class="accordion-content">
+                                        <div class="accordion-body">
+                                            <ul
+                                                style="list-style: disc; padding-left: 1.2rem; display: flex; flex-direction: column; gap: 0.5rem;">
+                                                <li><strong>Cloud Migration:</strong> Led AWS migration, setting up
+                                                    CI/CD pipelines.</li>
+                                                <li><strong>Contract Lifecycle Tool:</strong> Built CLM to manage
+                                                    contracts worth $3 Bn+ revenue
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="skills-tags">
+                                <span class="tag-pill">AWS</span>
+                                <span class="tag-pill">Cloud</span>
+
+                                <span class="tag-pill">Java</span>
+                                <span class="tag-pill">DevOps</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Card 5: College of Engineering Pune -->
+                    <article class="timeline-card-wrapper right" style="--card-accent: var(--color-accent-iim);">
+                        <div class="timeline-node">
+                            <img src="./coep_logo.jpg" alt="COEP Logo" class="node-img">
+                        </div>
+                        <div class="company-card">
+                            <div class="card-header" style="margin-bottom: 0;">
+                                <h3>College of Engineering Pune</h3>
+                                <h4>Bachelor of Technology - Information Technology | 2013 - 2017</h4>
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Case Studies -->
+        <section id="case-studies" class="section">
+            <div class="container">
+                <h2 class="section-title" style="text-align: center;">Featured Case Studies</h2>
+                <div class="case-study-grid">
+                    <div class="case-card">
+                        <div class="case-image"></div>
+                        <div class="case-content">
+                            <h3>Allen Online Platform</h3>
+                            <p style="color: var(--color-text-muted); font-size: 0.9rem; margin-bottom: 1rem;">Scaling a
+                                0-to-1 test and assessment platform to 1M monthly active users.</p>
+                            <a href="#" style="color: var(--color-primary); font-weight: 600; font-size: 0.9rem;">Read
+                                More &rarr;</a>
+                        </div>
+                    </div>
+                    <div class="case-card">
+                        <div class="case-image"></div>
+                        <div class="case-content">
+                            <h3>Edge Inferencing at Scale</h3>
+                            <p style="color: var(--color-text-muted); font-size: 0.9rem; margin-bottom: 1rem;">Reducing
+                                search latency by 80% using ONNX models on client edge devices.</p>
+                            <a href="#" style="color: var(--color-primary); font-weight: 600; font-size: 0.9rem;">Read
+                                More &rarr;</a>
+                        </div>
+                    </div>
+                    <div class="case-card">
+                        <div class="case-image"></div>
+                        <div class="case-content">
+                            <h3>Multimodal Homework Eval</h3>
+                            <p style="color: var(--color-text-muted); font-size: 0.9rem; margin-bottom: 1rem;">
+                                Automating grading with personalized feedback using Multimodal LLMs.</p>
+                            <a href="#" style="color: var(--color-primary); font-weight: 600; font-size: 0.9rem;">Read
+                                More &rarr;</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills -->
+        <section id="skills" class="section">
+            <div class="container">
+                <h2 class="section-title" style="text-align: center;">Competencies</h2>
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h3>Product Management</h3>
+                        <div class="skills-tags">
+                            <span class="tag-pill">0-to-1 Launch</span>
+                            <span class="tag-pill">Product Strategy</span>
+                            <span class="tag-pill">Go-to-Market</span>
+                            <span class="tag-pill">User Research</span>
+                            <span class="tag-pill">A/B Testing</span>
+                            <span class="tag-pill">Agile/Scrum</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h3>Technical & Domain</h3>
+                        <div class="skills-tags">
+                            <span class="tag-pill">AI/ML & LLMs</span>
+                            <span class="tag-pill">Computer Vision</span>
+                            <span class="tag-pill">Enterprise Search</span>
+                            <span class="tag-pill">EdTech</span>
+                            <span class="tag-pill">Cloud Architecture</span>
+                            <span class="tag-pill">Investment Banking</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact & Footer -->
+        <section id="contact" class="section" style="text-align: center; padding-bottom: 4rem;">
+            <div class="container">
+                <h2 class="section-title">Let's Connect</h2>
+                <p
+                    style="color: var(--color-text-muted); margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+                    Open to Product Management roles in AI/ML, EdTech, and Enterprise SaaS.
+                </p>
+                <div class="hero-buttons">
+                    <a href="https://www.linkedin.com/in/shubham-gatkal" class="btn btn-primary"
+                        style="padding: 1em 2.5em;">
+                        <ion-icon name="logo-linkedin"></ion-icon> LinkedIn
+                    </a>
+                    <a href="mailto:shubhamgatkal2901@gmail.com" class="btn btn-secondary"
+                        style="border: 2px solid var(--color-primary); color: white; padding: 1em 2.5em;">
+                        <ion-icon name="mail-outline"></ion-icon> Email Me
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <footer
+            style="text-align: center; padding: 2rem; border-top: 1px solid rgba(255,255,255,0.05); color: var(--color-text-muted); font-size: 0.85rem;">
+            <p>Built this portfolio website using Google Antigravity</p>
+        </footer>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
