@@ -146,7 +146,8 @@ document.addEventListener('DOMContentLoaded', () => {
     function animateCounter(el) {
         const target = parseFloat(el.getAttribute('data-target'));
         const suffix = el.getAttribute('data-suffix') || '';
-        const duration = 1500; // ms
+        const prefix = el.getAttribute('data-prefix') || '';
+        const duration = 2000; // Slower counter for smoother feel
         const frameDuration = 1000 / 60; // 60fps
         const totalFrames = Math.round(duration / frameDuration);
 
@@ -160,11 +161,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const currentValue = easeProgress * target;
 
             // Format: if integer, show integer. If float, show 1 decimal
-            el.textContent = (Number.isInteger(target) ? Math.round(currentValue) : currentValue.toFixed(1)) + suffix;
+            el.textContent = prefix + (Number.isInteger(target) ? Math.round(currentValue) : currentValue.toFixed(1)) + suffix;
 
             if (frame === totalFrames) {
                 clearInterval(timer);
-                el.textContent = target + suffix; // Ensure final value is exact
+                el.textContent = prefix + target + suffix; // Ensure final value is exact
             }
         }, frameDuration);
     }
