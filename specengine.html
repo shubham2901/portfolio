@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpecBuilder: Solving Context Debt with Multi-Agentic Workflows</title>
+    <meta name="description"
+        content="Technical deep-dive into SpecEngine AI, a multi-agentic system for converting product concepts into high-fidelity technical specs.">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true, theme: 'dark', themeVariables: { fontFamily: 'Inter' } });
+    </script>
+</head>
+
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="index.html" class="logo">PORTFOLIO</a>
+            <ul class="nav-links">
+                <li><a href="index.html#about" class="nav-link">About</a></li>
+                <li><a href="index.html#experience" class="nav-link">Experience</a></li>
+                <li><a href="index.html#case-studies" class="nav-link">Case Studies</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <article class="blog-post">
+            <header class="blog-header">
+                <div class="skills-tags" style="justify-content: center; margin-bottom: 1rem;">
+                    <span class="tag-pill">AI</span>
+                    <span class="tag-pill">LangGraph</span>
+                    <span class="tag-pill">Product Management</span>
+                    <span class="tag-pill">Python</span>
+                </div>
+                <h1 class="hero-title" style="font-size: 2.5rem; margin-bottom: 1rem;">SpecBuilder: Solving Context Debt
+                    with Multi-Agentic Workflows</h1>
+                <div class="blog-meta">
+                    <span><ion-icon name="calendar-outline" style="vertical-align: -2px;"></ion-icon> Dec 29,
+                        2025</span>
+                    <span><ion-icon name="time-outline" style="vertical-align: -2px;"></ion-icon> 8 min read</span>
+                </div>
+            </header>
+
+            <img src="specengine_hero.png" alt="SpecEngine AI Architecture Abstract" class="blog-hero-image">
+
+            <div class="article-content">
+                <p class="lead" style="font-size: 1.25rem; color: var(--color-text-muted);">
+                    The following technical write-up details the development and architecture of SpecEngine AI, a
+                    specialized multi-agentic system designed to bridge the gap between initial product concepts and
+                    high-fidelity technical documentation.
+                </p>
+
+                <h2>Product Overview</h2>
+                <h3>Target Audience</h3>
+                <p>The system is engineered for Product Managers and Software Engineers who utilize AI-native IDEs and
+                    autonomous coding agents. These users require high-density context to minimize iteration cycles and
+                    prevent technical debt caused by ambiguous requirements.</p>
+
+                <h3>Problem Statement</h3>
+                <p>Standard Large Language Models often suffer from "compliance bias," attempting to fulfill vague
+                    requests without challenging the underlying logic. This results in <strong>Context Debt</strong>—a
+                    lack of sufficient detail regarding edge cases, technical constraints, and success metrics.
+                    Consequently, the output from AI development tools requires significant rework because the initial
+                    prompt lacked structural integrity.</p>
+
+                <h3>Success Metrics</h3>
+                <ul>
+                    <li><strong>Context Density Ratio:</strong> Measurement of technical detail increase from initial
+                        seed input to final output.</li>
+                    <li><strong>Iteration Efficiency:</strong> Reduction in the number of corrective prompts required
+                        when the specification is provided to an AI IDE.</li>
+                    <li><strong>Requirement Completeness:</strong> Percentage of standard PRD components (Metrics,
+                        Risks, Solutions) populated with verified data.</li>
+                </ul>
+
+                <h2>Performance Comparison: The "Context Debt" Solution</h2>
+                <p>To quantify the value of a multi-agentic approach, the table below compares the output quality of a
+                    standard LLM against the SpecEngine AI workflow.</p>
+
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>Standard LLM (GPT-4o/Claude 3.5)</th>
+                            <th>SpecEngine AI Workflow</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Input Validation</strong></td>
+                            <td>Executes blindly on any input.</td>
+                            <td><strong>Sanity Gate:</strong> Flags ambiguity and halts execution if density is low.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Logic Reasoning</strong></td>
+                            <td>Predicts next tokens based on prompt.</td>
+                            <td><strong>Component Mapping:</strong> De-serializes input into structured PRD buckets.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Gap Detection</strong></td>
+                            <td>Rarely identifies missing requirements.</td>
+                            <td><strong>Generative UI:</strong> Dynamically prompts for specific missing data (GTM,
+                                Risks).</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Expert Inquiry</strong></td>
+                            <td>Passive response style.</td>
+                            <td><strong>Socratic Method:</strong> Generates 3 probing questions per component.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Architecture</strong></td>
+                            <td>Stateless Chat.</td>
+                            <td><strong>State-Machine:</strong> Persistent memory via LangGraph checkpoints.</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h2>System Architecture</h2>
+                <p>SpecEngine AI is built on a State-Machine architecture using the LangGraph framework. Unlike linear
+                    pipelines, this approach allows for cycles, conditional branching, and persistent state management.
+                    The graph-based design ensures that new logic nodes can be integrated without refactoring the core
+                    orchestration layer.</p>
+
+                <div class="mermaid-container">
+                    <pre class="mermaid">
+graph TD
+    A[User Input] --> B{Sanity Checker}
+    B -- Low Density --> C[Halt & Request Details]
+    C --> A
+    B -- Valid --> D[Component Master]
+    D --> E{Gap Analysis}
+    E -- Missing Data --> F[Generative UI Trigger]
+    F --> G[User Provides Data]
+    G --> D
+    E -- Complete --> H[Detailer Agent]
+    H --> I[Normalize Terminology]
+    I --> J[Generate Probing Questions]
+    J --> K[Final Technical Spec Output]
+    
+    style A fill:#1e293b,stroke:#38bdf8,color:#fff
+    style K fill:#2563eb,stroke:#fff,color:#fff,stroke-width:2px
+    style F fill:#7c3aed,stroke:#fff,color:#fff
+                    </pre>
+                </div>
+
+                <h3>Core Components and Agent Nodes</h3>
+                <ul>
+                    <li><strong>Sanity Checker:</strong> Evaluates input density and ensures the text contains
+                        actionable intent. It identifies the absence of project maturity (Prototype vs. Production) and
+                        environment context (Greenfield vs. Brownfield).</li>
+                    <li><strong>Component Master:</strong> De-serializes raw text into a structured schema (Goal,
+                        Problem, Cohort, Metrics, Solutions, Risks, GTM). It identifies information gaps and triggers
+                        the Generative UI to solicit missing data.</li>
+                    <li><strong>Detailer:</strong> Normalizes terminology and structures content for machine
+                        readability. It generates three targeted, probing questions designed to uncover technical
+                        dependencies or secondary risks for each section.</li>
+                </ul>
+
+                <h2>Technical Features</h2>
+                <h3>State-Driven Interaction & Generative UI</h3>
+                <p>The application maintains a centralized AgentState that tracks the evolution of the document and the
+                    current UI Queue. By using Streamlit fragments, the interface updates only the specific components
+                    being edited, maintaining UI stability and preventing full-page reloads.</p>
+
+                <h3>Edge GenAI Integration</h3>
+                <p>To optimize for latency and operational costs, the system utilizes Edge-based GenAI for routine
+                    processing steps. When the user is not actively providing new inputs, edge models handle
+                    classification and preliminary formatting tasks, reducing reliance on centralized APIs.</p>
+
+                <h2>Future Roadmap</h2>
+                <ul>
+                    <li><strong>Automated Architecture Visualization:</strong> Integration of Mermaid.js to generate
+                        system diagrams based on extracted solutions.</li>
+                    <li><strong>Specialized Specification Output:</strong> Expansion to generate specialized coding
+                        specs for devs and test cases for QA.</li>
+                    <li><strong>Stakeholder-Specific Viewports:</strong> Distinct rendering modes for dev-centric
+                        deep-dives or design-centric UX flows.</li>
+                </ul>
+
+                <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 3rem 0;">
+
+                <h3>Project Resources</h3>
+                <p>
+                    <a href="#" class="btn btn-secondary">
+                        <ion-icon name="logo-github" style="margin-right: 5px;"></ion-icon> View Source Code
+                    </a>
+                    <a href="#" class="btn btn-primary" style="margin-left: 1rem;">
+                        <ion-icon name="rocket-outline" style="margin-right: 5px;"></ion-icon> Try SpecEngine AI Live
+                    </a>
+                </p>
+            </div>
+        </article>
+    </main>
+
+    <footer
+        style="text-align: center; padding: 2rem; border-top: 1px solid rgba(255,255,255,0.05); color: var(--color-text-muted); font-size: 0.85rem;">
+        <p>Built this portfolio website using Google Antigravity</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
