@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
+    gsap.registerPlugin(ScrollTrigger);
 
-    // --- Sticky Header Logic ---
+    // --- Sticky Header ---
     const header = document.querySelector('.header');
     window.addEventListener('scroll', () => {
         if (window.scrollY > 50) {
@@ -28,7 +29,79 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- Timeline Drawing Animation ---
+    // --- Hero Entrance Animation ---
+    const heroTl = gsap.timeline({ delay: 0.4, defaults: { ease: 'power3.out' } });
+    heroTl
+        .to('.hero-greeting', { opacity: 1, y: 0, duration: 0.5 })
+        .to('.hero-title', { opacity: 1, y: 0, duration: 0.6 }, '-=0.2')
+        .to('.hero-subtitle', { opacity: 1, y: 0, duration: 0.6 }, '-=0.3')
+        .to('.hero-tagline', { opacity: 1, y: 0, duration: 0.5 }, '-=0.3')
+        .to('.hero-buttons', { opacity: 1, y: 0, duration: 0.5 }, '-=0.2');
+
+    // --- About Section ---
+    gsap.to('.about-text', {
+        scrollTrigger: { trigger: '#about', start: 'top 75%' },
+        opacity: 1, x: 0, duration: 0.8, ease: 'power2.out'
+    });
+    gsap.to('.about-image', {
+        scrollTrigger: { trigger: '#about', start: 'top 75%' },
+        opacity: 1, x: 0, duration: 0.8, ease: 'power2.out', delay: 0.2
+    });
+
+    // --- Section Titles ---
+    gsap.utils.toArray('.section-title').forEach(title => {
+        gsap.to(title, {
+            scrollTrigger: { trigger: title, start: 'top 85%' },
+            opacity: 1, y: 0, duration: 0.6, ease: 'power2.out'
+        });
+    });
+
+    // --- Timeline Cards (replaces IntersectionObserver) ---
+    gsap.utils.toArray('.timeline-card-wrapper').forEach(card => {
+        gsap.to(card, {
+            scrollTrigger: { trigger: card, start: 'top 80%' },
+            opacity: 1,
+            x: 0,
+            y: 0,
+            duration: 0.7,
+            ease: 'power2.out',
+            onStart: () => {
+                card.classList.add('visible');
+                card.querySelectorAll('.stat-value').forEach(counter => {
+                    animateCounter(counter);
+                });
+            }
+        });
+    });
+
+    // --- Case Study & Project Cards ---
+    const cardSections = ['#case-studies .case-card', '#projects .case-card'];
+    cardSections.forEach(selector => {
+        gsap.utils.toArray(selector).forEach((card, i) => {
+            gsap.to(card, {
+                scrollTrigger: { trigger: card, start: 'top 85%' },
+                opacity: 1, y: 0, duration: 0.6, ease: 'power2.out',
+                delay: i * 0.15
+            });
+        });
+    });
+
+    // --- Skills ---
+    gsap.utils.toArray('.skill-category').forEach((cat, i) => {
+        gsap.to(cat, {
+            scrollTrigger: { trigger: cat, start: 'top 85%' },
+            opacity: 1, y: 0, duration: 0.6, ease: 'power2.out',
+            delay: i * 0.15
+        });
+    });
+
+    // --- Contact ---
+    gsap.to('.contact-container', {
+        scrollTrigger: { trigger: '#contact', start: 'top 75%' },
+        opacity: 1, y: 0, duration: 0.8, ease: 'power2.out'
+    });
+
+    // --- Timeline Progress Line ---
     const timelineContainer = document.querySelector('.timeline-container');
     const timelineProgress = document.getElementById('timeline-progress');
 
@@ -118,33 +191,6 @@ document.addEventListener('DOMContentLoaded', () => {
         animateParticles();
     }
 
-    // --- Intersection Observer for Animations ---
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-
-    const animateOnScroll = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                if (entry.target.classList.contains('timeline-card-wrapper')) {
-                    entry.target.style.transitionDelay = '0.1s';
-                    entry.target.classList.add('visible');
-                    animateOnScroll.unobserve(entry.target);
-
-                    const counters = entry.target.querySelectorAll('.stat-value');
-                    counters.forEach(counter => {
-                        animateCounter(counter);
-                    });
-                }
-            }
-        });
-    }, observerOptions);
-
-    document.querySelectorAll('.timeline-card-wrapper').forEach(card => {
-        animateOnScroll.observe(card);
-    });
-
     // --- Counter Animation ---
     function animateCounter(el) {
         const target = parseFloat(el.getAttribute('data-target'));
@@ -175,7 +221,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return 1 - (1 - x) * (1 - x);
     }
 
-    // --- Accordion Logic ---
+    // --- Accordion ---
     const accHeaders = document.querySelectorAll('.accordion-header');
 
     accHeaders.forEach(header => {
