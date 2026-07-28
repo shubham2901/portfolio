@@ -10,17 +10,31 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // --- Mobile Menu ---
+    const menuBtn = document.querySelector('.mobile-menu-btn');
+    const navLinks = document.querySelector('.nav-links');
+
+    if (menuBtn && navLinks) {
+        menuBtn.addEventListener('click', () => {
+            menuBtn.classList.toggle('active');
+            navLinks.classList.toggle('open');
+        });
+
+        navLinks.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                menuBtn.classList.remove('active');
+                navLinks.classList.remove('open');
+            });
+        });
+    }
+
     // --- Timeline Drawing Animation ---
     const timelineContainer = document.querySelector('.timeline-container');
     const timelineProgress = document.getElementById('timeline-progress');
 
-    // Function to update the timeline line height based on scroll
     function updateTimelineProgress() {
         const rect = timelineContainer.getBoundingClientRect();
         const windowHeight = window.innerHeight;
-
-        // Calculate how much of the timeline container has been scrolled past the center of the viewport
-        // We want the line to draw as we scroll down
         const startOffset = windowHeight * 0.5;
         const containerTop = rect.top;
         const containerHeight = rect.height;
@@ -28,22 +42,18 @@ document.addEventListener('DOMContentLoaded', () => {
         let progress = 0;
 
         if (containerTop < startOffset) {
-            // Container has entered the "active" zone
             const distance = startOffset - containerTop;
             progress = (distance / containerHeight) * 100;
         }
 
-        // Clamp between 0 and 100
         progress = Math.max(0, Math.min(100, progress));
         timelineProgress.style.height = `${progress}%`;
     }
 
     if (timelineContainer && timelineProgress) {
         window.addEventListener('scroll', updateTimelineProgress);
-        // Initial check
         updateTimelineProgress();
     }
-
 
     // --- Particle System ---
     const canvas = document.getElementById('hero-particles');
@@ -64,9 +74,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 this.x = Math.random() * canvas.width;
                 this.y = Math.random() * canvas.height;
                 this.size = Math.random() * 2 + 0.5;
-                this.speedX = Math.random() * 0.5 - 0.25;
-                this.speedY = Math.random() * 0.5 - 0.25;
-                this.opacity = Math.random() * 0.5 + 0.1;
+                this.speedX = Math.random() * 0.4 - 0.2;
+                this.speedY = Math.random() * 0.4 - 0.2;
+                this.opacity = Math.random() * 0.3 + 0.05;
             }
 
             update() {
@@ -80,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             draw() {
-                ctx.fillStyle = `rgba(168, 85, 247, ${this.opacity})`; // Using the purple accent color
+                ctx.fillStyle = `rgba(100, 255, 218, ${this.opacity})`;
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 ctx.fill();
@@ -89,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         function initParticles() {
             particles = [];
-            const particleCount = Math.min(100, (canvas.width * canvas.height) / 10000); // Responsive count
+            const particleCount = Math.min(80, (canvas.width * canvas.height) / 12000);
             for (let i = 0; i < particleCount; i++) {
                 particles.push(new Particle());
             }
@@ -108,8 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
         animateParticles();
     }
 
-
-    // --- Intersection Observer for Animations (Cards & Counters) ---
+    // --- Intersection Observer for Animations ---
     const observerOptions = {
         threshold: 0.1,
         rootMargin: '0px 0px -50px 0px'
@@ -118,16 +127,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const animateOnScroll = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                // Reveal Timeline Cards
                 if (entry.target.classList.contains('timeline-card-wrapper')) {
-
-                    // Add slight stagger if scrolling fast
                     entry.target.style.transitionDelay = '0.1s';
-
                     entry.target.classList.add('visible');
                     animateOnScroll.unobserve(entry.target);
 
-                    // Trigger counters inside this card
                     const counters = entry.target.querySelectorAll('.stat-value');
                     counters.forEach(counter => {
                         animateCounter(counter);
@@ -137,18 +141,17 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, observerOptions);
 
-    // Observe timeline cards
     document.querySelectorAll('.timeline-card-wrapper').forEach(card => {
         animateOnScroll.observe(card);
     });
 
-    // --- Counter Animation Logic ---
+    // --- Counter Animation ---
     function animateCounter(el) {
         const target = parseFloat(el.getAttribute('data-target'));
         const suffix = el.getAttribute('data-suffix') || '';
         const prefix = el.getAttribute('data-prefix') || '';
-        const duration = 2000; // Slower counter for smoother feel
-        const frameDuration = 1000 / 60; // 60fps
+        const duration = 2000;
+        const frameDuration = 1000 / 60;
         const totalFrames = Math.round(duration / frameDuration);
 
         let frame = 0;
@@ -157,15 +160,13 @@ document.addEventListener('DOMContentLoaded', () => {
             frame++;
             const progress = frame / totalFrames;
             const easeProgress = easeOutQuad(progress);
-
             const currentValue = easeProgress * target;
 
-            // Format: if integer, show integer. If float, show 1 decimal
             el.textContent = prefix + (Number.isInteger(target) ? Math.round(currentValue) : currentValue.toFixed(1)) + suffix;
 
             if (frame === totalFrames) {
                 clearInterval(timer);
-                el.textContent = prefix + target + suffix; // Ensure final value is exact
+                el.textContent = prefix + target + suffix;
             }
         }, frameDuration);
     }
@@ -173,7 +174,6 @@ document.addEventListener('DOMContentLoaded', () => {
     function easeOutQuad(x) {
         return 1 - (1 - x) * (1 - x);
     }
-
 
     // --- Accordion Logic ---
     const accHeaders = document.querySelectorAll('.accordion-header');
@@ -183,17 +183,38 @@ document.addEventListener('DOMContentLoaded', () => {
             const content = header.nextElementSibling;
             const isActive = header.classList.contains('active');
 
-            // Toggle active class
             header.classList.toggle('active');
 
             if (isActive) {
-                // Close
                 content.style.maxHeight = null;
             } else {
-                // Open: Set max-height to scrollHeight
                 content.style.maxHeight = content.scrollHeight + "px";
             }
         });
     });
 
+    // --- Active Nav Link on Scroll ---
+    const sections = document.querySelectorAll('section[id]');
+    const navLinksAll = document.querySelectorAll('.nav-link');
+
+    function highlightNav() {
+        const scrollY = window.scrollY + 100;
+
+        sections.forEach(section => {
+            const top = section.offsetTop;
+            const height = section.offsetHeight;
+            const id = section.getAttribute('id');
+
+            if (scrollY >= top && scrollY < top + height) {
+                navLinksAll.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === '#' + id) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+        });
+    }
+
+    window.addEventListener('scroll', highlightNav);
 });

@@ -35,7 +35,7 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
         rel="stylesheet">
     <!-- Ionicons for icons -->
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
@@ -45,13 +45,19 @@
 <body>
     <header class="header">
         <nav class="nav container">
+            <a href="#hero" class="logo">SG<span class="logo-dot">.</span></a>
+            <button class="mobile-menu-btn" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
             <ul class="nav-links">
-                <li><a href="#about" class="nav-link">About</a></li>
-                <li><a href="#experience" class="nav-link">Experience</a></li>
-                <li><a href="#case-studies" class="nav-link">Case Studies</a></li>
-                <li><a href="#projects" class="nav-link">Projects</a></li>
-                <li><a href="#skills" class="nav-link">Skills</a></li>
-                <li><a href="#contact" class="nav-link">Contact</a></li>
+                <li><a href="#about" class="nav-link"><span class="nav-num">01.</span> About</a></li>
+                <li><a href="#experience" class="nav-link"><span class="nav-num">02.</span> Experience</a></li>
+                <li><a href="#case-studies" class="nav-link"><span class="nav-num">03.</span> Case Studies</a></li>
+                <li><a href="#projects" class="nav-link"><span class="nav-num">04.</span> Projects</a></li>
+                <li><a href="#skills" class="nav-link"><span class="nav-num">05.</span> Skills</a></li>
+                <li><a href="#contact" class="nav-link"><span class="nav-num">06.</span> Contact</a></li>
             </ul>
         </nav>
     </header>
@@ -61,11 +67,11 @@
         <section id="hero" class="hero">
             <canvas id="hero-particles"></canvas>
             <div class="container hero-content">
-                <h1 class="hero-title">Shubham Gatkal</h1>
-                <h2 class="hero-subtitle text-gradient">Senior Product Manager | AI/ML • B2C • Enterprise SaaS</h2>
-                <div class="hero-education">IIM Calcutta MBA | Ex-Microsoft </div>
-                <p class="hero-tagline">Building AI-powered products at scale, from 0-to-1 products to 250M+ MAU
-                    platforms.</p>
+                <p class="hero-greeting">Hi, my name is</p>
+                <h1 class="hero-title">Shubham Gatkal.</h1>
+                <h2 class="hero-subtitle">I build AI-powered products at scale.</h2>
+                <p class="hero-tagline">Senior Product Manager specializing in AI/ML, EdTech, and Enterprise SaaS.
+                    IIM Calcutta MBA, Ex-Microsoft &mdash; from 0-to-1 products to 250M+ MAU platforms.</p>
                 <div class="hero-buttons">
                     <a href="#experience" class="btn btn-primary">
                         View Experience
@@ -86,7 +92,7 @@
             <div class="container">
                 <div class="about-grid">
                     <div class="about-text">
-                        <h2 class="section-title">About Me</h2>
+                        <h2 class="section-title" data-num="01">About Me</h2>
                         <p>I am a Product Manager with a strong engineering foundation and business acumen from IIM
                             Calcutta. My journey has taken me from building scalable financial systems at Barclays to
                             driving enterprise search innovation at Microsoft, and now revolutionizing EdTech at Allen.
@@ -94,13 +100,10 @@
                         <p>I specialize in bridging the gap between cutting-edge AI technologies and user needs. Whether
                             it's deploying Edge Inferencing models to 250M users or building 0-to-1 multimodal learning
                             platforms, I focus on delivering measurable impact.</p>
-
                     </div>
                     <div class="about-image">
-                        <!-- Placeholder for professional image -->
                         <img src="https://res.cloudinary.com/dwnrhiokb/image/upload/v1766125516/Gemini_Generated_Image_vd7teevd7teevd7t_knssaw.png"
-                            alt="Shubham Gatkal"
-                            style="width:100%; height:100%; object-fit:cover; border-radius: 20px;">
+                            alt="Shubham Gatkal">
                     </div>
                 </div>
             </div>
@@ -109,7 +112,7 @@
         <!-- Experience Timeline Section -->
         <section id="experience" class="section timeline-section">
             <div class="container">
-                <h2 class="section-title" style="text-align: center; margin-bottom: 4rem;">Experience & Impact</h2>
+                <h2 class="section-title centered" data-num="02">Experience & Impact</h2>
 
                 <div class="timeline-container">
                     <div class="timeline-line">
@@ -153,8 +156,7 @@
                                     </button>
                                     <div class="accordion-content">
                                         <div class="accordion-body">
-                                            <ul
-                                                style="list-style: disc; padding-left: 1.2rem; display: flex; flex-direction: column; gap: 0.5rem;">
+                                            <ul class="initiative-list">
                                                 <li><strong>0-to-1 Launch:</strong> Online Class Platform
                                                     scaling to 1Mn MAU.</li>
                                                 <li><strong>AI Proctoring:</strong> Built Vision model to catch
@@ -164,10 +166,10 @@
                                                 <li><strong>Vision Models:</strong> In-class attentiveness tracking
                                                     using Google MediaPipe.</li>
                                                 <li><strong>HTML Whiteboard:</strong> Built inhouse whiteboard
-                                                    to reduce data consumption by 80%.<strong>Patent Pending</strong>
+                                                    to reduce data consumption by 80%. <strong>Patent Pending</strong>
                                                 </li>
                                                 <li><strong>B2B Onboarding:</strong> Onboarded 500+ B2B partner schools
-                                                    for online classes and test series.<strong>INR 100Cr ARR</strong>
+                                                    for online classes and test series. <strong>INR 100Cr ARR</strong>
                                                 </li>
                                             </ul>
                                         </div>
@@ -221,15 +223,13 @@
                                     </button>
                                     <div class="accordion-content">
                                         <div class="accordion-body">
-                                            <ul
-                                                style="list-style: disc; padding-left: 1.2rem; display: flex; flex-direction: column; gap: 0.5rem;">
+                                            <ul class="initiative-list">
                                                 <li><strong>Search Success:</strong> Improved ranking for Outlook,
                                                     Teams, and Edge using user history.</li>
                                                 <li><strong>B2B Evangelization:</strong> Led outreach to 50K+ developers
                                                     for Embedded Search.</li>
                                                 <li><strong>Edge Inferencing:</strong> Deployed ONNX models to 250M
                                                     devices, reducing latency from 300ms to 60ms.</li>
-
                                             </ul>
                                         </div>
                                     </div>
@@ -257,7 +257,7 @@
                                 </div>
                             </div>
 
-                            <div style="padding: 1rem 0; color: var(--color-text-muted); font-size: 0.95rem;">
+                            <div class="card-description">
                                 <p>Transitioned from Engineering to Product Management.</p>
                             </div>
                         </div>
@@ -295,8 +295,7 @@
                                     </button>
                                     <div class="accordion-content">
                                         <div class="accordion-body">
-                                            <ul
-                                                style="list-style: disc; padding-left: 1.2rem; display: flex; flex-direction: column; gap: 0.5rem;">
+                                            <ul class="initiative-list">
                                                 <li><strong>Cloud Migration:</strong> Led AWS migration, setting up
                                                     CI/CD pipelines.</li>
                                                 <li><strong>Contract Lifecycle Tool:</strong> Built CLM to manage
@@ -311,7 +310,6 @@
                             <div class="skills-tags">
                                 <span class="tag-pill">AWS</span>
                                 <span class="tag-pill">Cloud</span>
-
                                 <span class="tag-pill">Java</span>
                                 <span class="tag-pill">DevOps</span>
                             </div>
@@ -340,36 +338,33 @@
         <!-- Case Studies -->
         <section id="case-studies" class="section">
             <div class="container">
-                <h2 class="section-title" style="text-align: center;">Featured Case Studies</h2>
+                <h2 class="section-title centered" data-num="03">Featured Case Studies</h2>
                 <div class="case-study-grid">
                     <div class="case-card">
-                        <div class="case-image"></div>
+                        <div class="case-image case-gradient-1"></div>
                         <div class="case-content">
                             <h3>Allen Online Platform</h3>
-                            <p style="color: var(--color-text-muted); font-size: 0.9rem; margin-bottom: 1rem;">Scaling a
-                                0-to-1 test and assessment platform to 1M monthly active users.</p>
-                            <a href="#" style="color: var(--color-primary); font-weight: 600; font-size: 0.9rem;">Read
-                                More &rarr;</a>
+                            <p class="case-desc">Scaling a 0-to-1 test and assessment platform to 1M monthly active
+                                users.</p>
+                            <a href="#" class="project-link">Read More &rarr;</a>
                         </div>
                     </div>
                     <div class="case-card">
-                        <div class="case-image"></div>
+                        <div class="case-image case-gradient-2"></div>
                         <div class="case-content">
                             <h3>Edge Inferencing at Scale</h3>
-                            <p style="color: var(--color-text-muted); font-size: 0.9rem; margin-bottom: 1rem;">Reducing
-                                search latency by 80% using ONNX models on client edge devices.</p>
-                            <a href="#" style="color: var(--color-primary); font-weight: 600; font-size: 0.9rem;">Read
-                                More &rarr;</a>
+                            <p class="case-desc">Reducing search latency by 80% using ONNX models on client edge
+                                devices.</p>
+                            <a href="#" class="project-link">Read More &rarr;</a>
                         </div>
                     </div>
                     <div class="case-card">
-                        <div class="case-image"></div>
+                        <div class="case-image case-gradient-3"></div>
                         <div class="case-content">
                             <h3>Multimodal Homework Eval</h3>
-                            <p style="color: var(--color-text-muted); font-size: 0.9rem; margin-bottom: 1rem;">
-                                Automating grading with personalized feedback using Multimodal LLMs.</p>
-                            <a href="#" style="color: var(--color-primary); font-weight: 600; font-size: 0.9rem;">Read
-                                More &rarr;</a>
+                            <p class="case-desc">Automating grading with personalized feedback using Multimodal LLMs.
+                            </p>
+                            <a href="#" class="project-link">Read More &rarr;</a>
                         </div>
                     </div>
                 </div>
@@ -377,48 +372,66 @@
         </section>
 
         <!-- Personal Projects -->
-        <section id="projects" class="section" style="background-color: #162033;">
+        <section id="projects" class="section section-alt">
             <div class="container">
-                <h2 class="section-title" style="text-align: center;">Personal Projects</h2>
-                <div class="case-study-grid">
+                <h2 class="section-title centered" data-num="04">Personal Projects</h2>
+                <div class="projects-grid">
                     <!-- SpecBuilder Project -->
-                    <div class="case-card">
-                        <img src="specengine_hero.png" alt="SpecBuilder AI" class="case-image"
-                            style="object-fit: cover; width: 100%; height: 200px;">
+                    <div class="case-card project-featured">
+                        <img src="specengine_hero.png" alt="SpecBuilder AI" class="case-image project-img">
                         <div class="case-content">
                             <h3>SpecBuilder</h3>
-                            <div class="skills-tags" style="margin-bottom: 0.5rem;">
-                                <span class="tag-pill" style="font-size: 0.7rem;">Agentic AI</span>
-                                <span class="tag-pill" style="font-size: 0.7rem;">LangGraph</span>
+                            <div class="skills-tags">
+                                <span class="tag-pill">Agentic AI</span>
+                                <span class="tag-pill">LangGraph</span>
                             </div>
-                            <p style="color: var(--color-text-muted); font-size: 0.9rem; margin-bottom: 1rem;">
-                                Multi-agent system converting ambiguous ideas into high-fidelity technical specs.</p>
-                            <a href="specengine.html"
-                                style="color: var(--color-secondary); font-weight: 600; font-size: 0.9rem;">View Project
-                                &rarr;</a>
+                            <p class="case-desc">Multi-agent system converting ambiguous ideas into high-fidelity
+                                technical specs.</p>
+                            <div class="project-links-row">
+                                <a href="specengine.html" class="project-link">
+                                    View Project &rarr;
+                                </a>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="case-card">
-                        <div class="case-image"
-                            style="background: linear-gradient(135deg, #FF6B6B 0%, #556270 100%); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; padding: 1rem; text-align: center; height: 200px;">
-                            To be released before Mar 2026
+                    <!-- Penfight Project -->
+                    <div class="case-card project-featured">
+                        <div class="case-image penfight-hero">
+                            <div class="penfight-visual">
+                                <span class="penfight-icon">&#9998;</span>
+                                <span class="penfight-label">PENFIGHT</span>
+                            </div>
                         </div>
                         <div class="case-content">
-                            <h3>AKK</h3>
-                            <h4 style="font-size: 0.9rem; color: var(--color-primary); margin-bottom: 0.5rem;">Work in
-                                progress</h4>
-                        </div>
-                    </div>
-                    <div class="case-card">
-                        <div class="case-image"
-                            style="background: linear-gradient(135deg, #4ECDC4 0%, #556270 100%); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; padding: 1rem; text-align: center; height: 200px;">
-                            Under experimentation and iterations
-                        </div>
-                        <div class="case-content">
-                            <h3>Tuition Management system</h3>
-                            <h4 style="font-size: 0.9rem; color: var(--color-primary); margin-bottom: 0.5rem;">Building
-                                student dashboard for a tuition center for students to see their results.</h4>
+                            <h3>Penfight</h3>
+                            <div class="skills-tags">
+                                <span class="tag-pill">Matter.js</span>
+                                <span class="tag-pill">Capacitor</span>
+                                <span class="tag-pill">Mobile Game</span>
+                            </div>
+                            <p class="case-desc">Physics-based mobile game digitizing the classic Indian school pen
+                                fight. Flick pens across the table with realistic physics, AI opponents, and 200
+                                levels.</p>
+                            <div class="project-metrics">
+                                <div class="metric">
+                                    <span class="metric-value">200</span>
+                                    <span class="metric-label">Levels</span>
+                                </div>
+                                <div class="metric">
+                                    <span class="metric-value">197</span>
+                                    <span class="metric-label">Tests</span>
+                                </div>
+                                <div class="metric">
+                                    <span class="metric-value">3+</span>
+                                    <span class="metric-label">Platforms</span>
+                                </div>
+                            </div>
+                            <div class="project-links-row">
+                                <a href="https://github.com/shubham2901/penfight" target="_blank" class="project-link">
+                                    <ion-icon name="logo-github"></ion-icon> GitHub &rarr;
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -428,7 +441,7 @@
         <!-- Skills -->
         <section id="skills" class="section">
             <div class="container">
-                <h2 class="section-title" style="text-align: center;">Competencies</h2>
+                <h2 class="section-title centered" data-num="05">Competencies</h2>
                 <div class="skills-grid">
                     <div class="skill-category">
                         <h3>Product Management</h3>
@@ -456,30 +469,36 @@
             </div>
         </section>
 
-        <!-- Contact & Footer -->
-        <section id="contact" class="section" style="text-align: center; padding-bottom: 4rem;">
-            <div class="container">
-                <h2 class="section-title">Let's Connect</h2>
-                <p
-                    style="color: var(--color-text-muted); margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">
-                    Open to Product Management roles in AI/ML, EdTech, and Enterprise SaaS.
-                </p>
+        <!-- Contact -->
+        <section id="contact" class="section">
+            <div class="container contact-container">
+                <p class="contact-overline">06. What's Next?</p>
+                <h2 class="contact-title">Let's Connect</h2>
+                <p class="contact-desc">Open to Product Management roles in AI/ML, EdTech, and Enterprise SaaS.</p>
                 <div class="hero-buttons">
-                    <a href="https://www.linkedin.com/in/shubham-gatkal" class="btn btn-primary"
-                        style="padding: 1em 2.5em;">
+                    <a href="https://www.linkedin.com/in/shubham-gatkal" class="btn btn-primary">
                         <ion-icon name="logo-linkedin"></ion-icon> LinkedIn
                     </a>
-                    <a href="mailto:shubhamgatkal2901@gmail.com" class="btn btn-secondary"
-                        style="border: 2px solid var(--color-primary); color: white; padding: 1em 2.5em;">
+                    <a href="mailto:shubhamgatkal2901@gmail.com" class="btn btn-outline">
                         <ion-icon name="mail-outline"></ion-icon> Email Me
                     </a>
                 </div>
             </div>
         </section>
 
-        <footer
-            style="text-align: center; padding: 2rem; border-top: 1px solid rgba(255,255,255,0.05); color: var(--color-text-muted); font-size: 0.85rem;">
-            <p>Built this portfolio website using Google Antigravity</p>
+        <footer class="footer">
+            <div class="footer-links">
+                <a href="https://www.linkedin.com/in/shubham-gatkal" target="_blank" aria-label="LinkedIn">
+                    <ion-icon name="logo-linkedin"></ion-icon>
+                </a>
+                <a href="https://github.com/shubham2901" target="_blank" aria-label="GitHub">
+                    <ion-icon name="logo-github"></ion-icon>
+                </a>
+                <a href="mailto:shubhamgatkal2901@gmail.com" aria-label="Email">
+                    <ion-icon name="mail-outline"></ion-icon>
+                </a>
+            </div>
+            <p class="footer-credit">Built with curiosity and Google Antigravity</p>
         </footer>
     </main>
 
