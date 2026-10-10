@@ -1,6 +1,6 @@
 # River portfolio: story and world
 
-Date: 9 Oct 2026
+Date: 9 Oct 2026, gaps closed 10 Oct 2026
 Status: story locked. Art style open until the feasibility check. Design and build come after.
 
 ## Why we're rebuilding
@@ -37,6 +37,15 @@ There are only three.
 
 Otter habits at port (first pass, can change): ties the rope to the dock, floats on its back, cracks a shell on its rock, waves at birds, sometimes glances back at the visitor.
 
+## Who is this? Shubham's name, shown lightly
+
+No header, no big title. The name shows up naturally inside the world:
+
+- **Boarding ticket.** The start screen is a small dock at dawn. The tap to start is taking a ticket: "Passenger: you. Helmsman: the otter. Voyage of Shubham Gatkal."
+- **Name on the bow.** "S. Gatkal" painted small and a bit worn on the front of the boat, the way real boats carry a name. It sits in the bottom strip of the screen the whole trip.
+- **Honor boards** at the college towns carry the full name.
+- **Bottle note** is addressed "To Shubham".
+
 ## The journey
 
 ### Time of day
@@ -44,6 +53,11 @@ Otter habits at port (first pass, can change): ties the rope to the dock, floats
 - On load, it's dawn, with the sun rising ahead over the river or behind the mountains and an orange sky.
 - The sky moves forward as you sail. By Zluri it's about 10 to 11am.
 - The point: it's still morning, and most of the day is ahead.
+- Sailing back does not rewind the sky. It stays where it is.
+
+### Knowing where you are
+
+Years are shown next to each building and on each honor board, so the visitor always knows which part of the timeline they're in.
 
 ### Along the river
 
@@ -80,14 +94,16 @@ Shubham didn't build anything at college, so these towns say "I was here" instea
 - Logs and construction gear float across the river, so the boat can't go further. The visitor can only go back.
 - Scaffolding and half-built buildings. Shubham's avatar is at work on one of them.
 - Zluri's projects are the buildings under construction.
-- Nothing past Zluri is shown or explained.
+- **Empty plot.** Past the logs, across the water, is a cleared plot with a few stakes in the ground. Now and then Shubham's avatar stops working and looks at it. No sign, no text. Nothing says "moving soon" or "open to work". The plot is the only hint about what's next, and people can read it however they like. (Reason: people at Zluri may see this site, and Shubham doesn't want to look like he hops jobs.)
+- **Bottle on the dock.** When the visitor lands on the Zluri dock, a message bottle is lying there. See "Message in a bottle" below.
+- Nothing else past Zluri is shown or explained.
 
 ## Moving through it
 
 | Action | What happens |
 |---|---|
-| Page load | Dawn and sunrise on screen. A prompt asks for a tap to start. |
-| First tap or click | Starts the trip and starts the sound. Browsers block sound until a tap, click or key press, and scrolling doesn't count, so this tap is needed. |
+| Page load | Dawn and sunrise on a small dock. A boarding ticket is held out to the visitor. |
+| First tap or click (taking the ticket) | Starts the trip and starts the sound. Browsers block sound until a tap, click or key press, and scrolling doesn't count, so this tap is needed. |
 | Scroll forward or back | The boat sails ahead or back. |
 | Click ahead on the river or behind | The boat moves ahead or back. |
 | Next button | Jumps straight to the next port. Also the way to skip a town. |
@@ -95,19 +111,37 @@ Shubham didn't build anything at college, so these towns say "I was here" instea
 | Scroll ahead while docked | The visitor climbs onto the dock. |
 | On the dock, moving the mouse | Looks around the town. Mouse only, no sailing. |
 | On the dock, scrolling back past a set amount | The visitor gets back in the boat. |
-| Scroll ahead after getting back in | The boat sails on to the next town. It does not dock again. |
+| Scroll ahead after getting back in | The boat sails on to the next town. It does not dock again at the town it just left. |
+| Sailing back to an earlier town | The boat docks there again, same as the first time. The sky does not change. |
 
 ## On the deck
 
 - **Ship's manifest:** a clipboard by the wheel. It opens a standard, plain resume page. The visitor can download a PDF or copy a share link. This is the recruiter shortcut, and it's always one click away.
-- **Message in a bottle:** sits on deck the whole trip. Click it, write a note, and the otter tosses the bottle into the river. Behind the scenes, this sends Shubham an email. It's the only contact path.
+- **Message in a bottle:** see its own section below.
 - **Side project tools (on hold):** SpecBuilder as a net and PenFight as a game. Only these two. We'll design and build them later.
+
+## Message in a bottle
+
+This is the contact path. Behind the scenes it sends Shubham an email. The manifest also has his email for anyone in a hurry.
+
+Where the bottle is:
+- On deck the whole trip.
+- Also lying on the Zluri dock when the visitor lands there.
+
+The flow:
+1. Click the bottle. Write a note, addressed "To Shubham". Press done.
+2. The bottle is handed to the otter.
+3. **If at Zluri:** the otter throws it at Shubham's avatar, who is working on a building. It bonks him on the head. He falls over, out cold, with "zzz" floating up.
+4. **If anywhere else:** the otter pulls a speedboat motor out of nowhere, clamps it on the boat, and races to Zluri (putt-putt-putt). Without getting off, it throws the bottle at Shubham. Same bonk, same fall, same zzz. The motor then vanishes the way it came. The boat stays at Zluri, and the visitor can sail back from there.
+5. **Confirmation:** the note lands on Shubham's chest. The otter dusts off its paws and glances back at the visitor. A small line fades in, in a slightly funny tone. Working line: "Delivered. Straight to the head. He'll read it when he wakes up." Final wording comes with the rest of the copy.
+6. **If the email fails:** the bottle misses, splashes into the water, and floats back to the boat. The visitor can try again.
 
 ## Sound
 
 - On by default, starting with the first tap. There's an off button.
 - Always light: soft breeze, the sail, birds chirping.
 - When the otter does something, a small soft sound plays. Never loud or bold.
+- Two allowed exceptions, both short and comic: the speedboat motor's putt-putt, and a small thud for the bonk.
 
 ## Phones
 
@@ -141,12 +175,13 @@ Vertical layout. Forward-facing views like this one already fit a tall screen. T
 ## Still open
 
 1. **Art style.** Five options: (1) flat color with bold outlines, (2) pencil or rubber-hose cartoon, (3) clean flat vector (those three come from the reference images), (4) Ghibli-style painting, (5) pixel art. We pick after the feasibility check. The check judges each style for this toy-theater, first-person setup on four things: staying consistent, how hard the otter is to animate, how well it works as flat cutouts, and whether one person can make it look high quality.
-2. **"What I'm looking for."** It was on the original content list but has no home in the story now, since nothing past Zluri is shown. Decide whether it lives in the manifest, or nowhere.
-3. **Zluri content.** Real role, dates and projects.
-4. **Board and stone copy.** Final short texts for every building and honor board.
-5. **Deck tools.** SpecBuilder net and PenFight game, on hold.
-6. **Town themes.** The first-pass themes above need detail in design.
-7. **How the clickable buildings look.** Decided in design.
+2. **Zluri content.** Real role, dates and projects.
+3. **Board, stone and ticket copy.** Final short texts for every building, honor board, the ticket and the bottle confirmation line.
+4. **Deck tools.** SpecBuilder net and PenFight game, on hold.
+5. **Town themes.** The first-pass themes above need detail in design.
+6. **How the clickable buildings look.** Decided in design.
+
+Closed: "What I'm looking for" is not written anywhere. The empty plot at Zluri is the only hint.
 
 ## Next steps
 
