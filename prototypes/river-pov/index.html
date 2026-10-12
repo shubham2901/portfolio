@@ -23,8 +23,8 @@
       <line x1="0" y1="0" x2="0" y2="14" stroke="#1f1a16" stroke-width="2.2"/>
     </pattern>
     <!-- The otter cutout is split in two: body, and tail tip (so the tail can swish). -->
-    <clipPath id="bodyClip"><path d="M892 442 H1109 V717 H1066 V762 H892 Z"/></clipPath>
-    <clipPath id="tailClip"><rect x="1060" y="717" width="49" height="45"/></clipPath>
+    <clipPath id="bodyClip"><path d="M875 442 H1125 V711 H1075 V762 H875 Z"/></clipPath>
+    <clipPath id="tailClip"><rect x="1069" y="711" width="56" height="51"/></clipPath>
   </defs>
 
   <!-- Hull rail and deck, in black ink with flat colour -->
@@ -62,8 +62,8 @@
 
   <!-- Otter (code puppet: breathe, sway, tail swish, little random acts) -->
   <g id="otter">
-    <image id="tail" href="assets/otter-back.png" x="892" y="442" width="217" height="320" clip-path="url(#tailClip)"/>
-    <image id="body" href="assets/otter-back.png" x="892" y="442" width="217" height="320" clip-path="url(#bodyClip)"/>
+    <image id="tail" href="assets/otter-back.png" x="875" y="442" width="250" height="320" clip-path="url(#tailClip)"/>
+    <image id="body" href="assets/otter-back.png" x="875" y="442" width="250" height="320" clip-path="url(#bodyClip)"/>
   </g>
 </svg>
 
@@ -177,7 +177,7 @@ function drawWorld(t){
 
 // ---------- Otter puppet ----------
 const otter = document.getElementById('otter'), tail = document.getElementById('tail'), spokes = document.getElementById('wheel');
-const FEET = [1000, 762], TAIL_ROOT = [1066, 740], WHEEL = [1000, 565];
+const FEET = [1000, 762], TAIL_ROOT = [1075, 740], WHEEL = [1000, 565];
 // Random little acts. Each returns lean (deg), shift (px), wheel turn (deg), wiggle, tail lift for a time 0..1.
 const ease = x => x < .5 ? 2*x*x : 1 - Math.pow(-2*x + 2, 2) / 2;
 const hold = (x, a = .25, b = .75) => x < a ? ease(x/a) : x > b ? ease((1 - x)/(1 - b)) : 1;
