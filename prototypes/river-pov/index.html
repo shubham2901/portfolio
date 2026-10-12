@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>River POV prototype</title>
 <style>
-  :root { --sky: #f3b27a; }
+  :root { --sky: #cfe2ea; }
   html, body { margin: 0; height: 100%; overflow: hidden; background: var(--sky); }
   #world { position: fixed; inset: -2%; width: 104%; height: 104%; display: block; will-change: transform; }
   #boat { position: fixed; left: 0; bottom: 0; width: 100%; height: 100%; display: block; pointer-events: none; }
@@ -68,77 +68,112 @@
 </svg>
 
 <script>
-// ---------- River: the painting, with flowing water drawn by a small WebGL shader ----------
+// ---------- River: code-drawn sky, sun and water in ink style, with the AI-drawn land on top ----------
 const canvas = document.getElementById('world');
-const gl = canvas.getContext('webgl', { antialias: false });
+const ctx = canvas.getContext('2d');
 const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-const vert = `attribute vec2 p; varying vec2 v; void main(){ v = p*.5+.5; gl_Position = vec4(p,0.,1.); }`;
-const frag = `precision mediump float;
-varying vec2 v; uniform sampler2D img; uniform float t; uniform vec2 res; uniform vec2 isz;
-const float HORIZON = 0.611;   // where the water starts in the painting (from the top)
-const float SUNX = 0.492;      // the sun's column in the painting
-void main(){
-  // cover-fit the painting to the screen, centred on the sun
-  vec2 s = gl_FragCoord.xy / res; s.y = 1.0 - s.y;
-  float ra = res.x/res.y, ia = isz.x/isz.y;
-  vec2 uv = s;
-  // on tall screens the sun sits left of centre, so the otter (right of centre) doesn't hide it
-  // (clamped so the crop never runs past the painting's edge on near-16:9 screens)
-  if (ra > ia) { uv.y = (s.y - .5) * ia/ra + .5; }
-  else { float k = ra/ia; float a = clamp(.3, (SUNX + k - 1.0)/k, SUNX/k); uv.x = (s.x - a) * k + SUNX; }
-  float glint = 0.0;
-  if (uv.y > HORIZON) {
-    float d = uv.y - HORIZON;
-    float depth = 0.05 / d;                         // big near the horizon, small near the boat
-    float fade = smoothstep(0.0, 0.04, d);
-    // ripples travel toward the viewer: the boat is moving forward
-    float w = sin(depth*7.0 + t*1.1) * .6 + sin(depth*13.0 + uv.x*24.0 + t*1.6) * .4;
-    float amp = 0.0022 * fade * (0.5 + d*2.5);
-    uv.x += w * amp;
-    uv.y += cos(depth*9.0 + t*1.3) * amp * .5;
-    uv.y = max(uv.y, HORIZON + 0.002);
-    // short sparkles, mostly in the sun's streak, broken into dashes so they don't read as lines
-    float sun = exp(-pow((uv.x - SUNX)/0.04, 2.0));
-    float dash = pow(max(0.0, sin(uv.x*140.0 + depth*5.0 + t*0.7)), 6.0);
-    glint = pow(max(0.0, sin(depth*22.0 + t*2.2)), 24.0) * dash * 0.5 * sun * fade;
-  }
-  vec3 c = texture2D(img, clamp(uv, 0.0, 1.0)).rgb;
-  gl_FragColor = vec4(c + glint * vec3(1.0, .9, .7), 1.0);
-}`;
+// Everything is placed in the land image's own pixel space, then cover-fitted to the screen.
+const IW = 1672, IH = 941;
+const HORIZON = 554;      // where the river meets the hills, in the land image
+const VX = 855;           // the river's vanishing point
+const SUN = { x: 836, y: 520, r: 46 };
+const INK = '#1f1a16';
 
-function sh(type, src){ const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s);
-  if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) console.error(gl.getShaderInfoLog(s)); return s; }
-const prog = gl.createProgram();
-gl.attachShader(prog, sh(gl.VERTEX_SHADER, vert)); gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, frag));
-gl.linkProgram(prog); gl.useProgram(prog);
-gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
-gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
-const loc = gl.getAttribLocation(prog, 'p'); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
-const U = n => gl.getUniformLocation(prog, n);
+const land = new Image();
+land.onload = () => requestAnimationFrame(frame);
+land.src = 'assets/land.png';
 
-const img = new Image();
-img.onload = () => {
-  const tex = gl.createTexture(); gl.bindTexture(gl.TEXTURE_2D, tex);
-  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, img);
-  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
-  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
-  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-  gl.uniform2f(U('isz'), img.width, img.height);
-  requestAnimationFrame(frame);
-};
-img.src = 'assets/river.jpg';
-
+let view = { s: 1, ox: 0, oy: 0 };
 function resize(){
   const dpr = Math.min(devicePixelRatio || 1, 2);
   canvas.width = Math.round(canvas.clientWidth * dpr); canvas.height = Math.round(canvas.clientHeight * dpr);
-  gl.viewport(0, 0, canvas.width, canvas.height); gl.uniform2f(U('res'), canvas.width, canvas.height);
+  const W = canvas.width, H = canvas.height, s = Math.max(W / IW, H / IH);
+  // tall screens: keep the vanishing point left of centre so the otter (right of centre) doesn't cover it
+  const want = W / IH / s < 1.3 ? .32 : .5;
+  const ox = Math.min(0, Math.max(W - IW * s, want * W - VX * s));
+  view = { s, ox, oy: (H - IH * s) / 2 };
   // Narrow screens: crop the boat around the otter, not the middle of the deck.
   const a = innerWidth / innerHeight, boat = document.getElementById('boat');
   if (a < 16/9) { const w = 900 * a; boat.setAttribute('viewBox', `${Math.max(0, Math.min(1600 - w, 960 - w/2))} 0 ${w} 900`); }
   else boat.setAttribute('viewBox', '0 0 1600 900');
 }
 addEventListener('resize', resize); resize();
+
+// Wave marks: little white squiggles that start near the horizon and slide toward the boat.
+const rand = (a, b) => a + Math.random() * (b - a);
+const marks = Array.from({ length: 170 }, () => ({ z: Math.random(), u: rand(-1, 1), w: rand(.7, 1.3) }));
+const glints = Array.from({ length: 26 }, () => ({ z: Math.random(), u: rand(-1, 1) }));
+
+function squiggle(x, y, len, amp){
+  ctx.beginPath(); ctx.moveTo(x - len / 2, y);
+  ctx.bezierCurveTo(x - len / 4, y - amp, x - len / 8, y - amp, x, y);
+  ctx.bezierCurveTo(x + len / 8, y + amp * .6, x + len / 4, y + amp * .6, x + len / 2, y);
+  ctx.stroke();
+}
+
+function cloud(x, y, k){
+  ctx.beginPath();
+  ctx.moveTo(x - 90 * k, y);
+  ctx.bezierCurveTo(x - 100 * k, y - 34 * k, x - 50 * k, y - 46 * k, x - 30 * k, y - 28 * k);
+  ctx.bezierCurveTo(x - 20 * k, y - 70 * k, x + 40 * k, y - 70 * k, x + 44 * k, y - 30 * k);
+  ctx.bezierCurveTo(x + 80 * k, y - 46 * k, x + 110 * k, y - 10 * k, x + 90 * k, y);
+  ctx.closePath();
+  ctx.fillStyle = '#fff4e6'; ctx.fill();
+  ctx.strokeStyle = '#e7ae86'; ctx.lineWidth = 2.5; ctx.stroke();
+}
+
+let last = 0;
+function drawWorld(t){
+  const dt = Math.min(.05, t - last); last = t;
+  const { s, ox, oy } = view;
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.setTransform(s, 0, 0, s, ox, oy);
+  // the image space extends past the picture on very tall/wide screens: pad sky up and water down
+  const top = -oy / s - 20, bottom = (canvas.height - oy) / s + 20, left = -ox / s - 20, right = (canvas.width - ox) / s + 20;
+
+  // Sky: soft dawn, pale blue up top to peach at the horizon
+  const sky = ctx.createLinearGradient(0, top, 0, HORIZON);
+  sky.addColorStop(0, '#9fcbe6'); sky.addColorStop(.55, '#d9e6ea'); sky.addColorStop(1, '#fbd7b2');
+  ctx.fillStyle = sky; ctx.fillRect(left, top, right - left, HORIZON - top + 2);
+
+  // Sun: flat disc with a thin orange ink line, sitting low behind the hills
+  ctx.beginPath(); ctx.arc(SUN.x, SUN.y, SUN.r, 0, Math.PI * 2);
+  ctx.fillStyle = '#ffe8a3'; ctx.fill(); ctx.strokeStyle = '#eba25c'; ctx.lineWidth = 3; ctx.stroke();
+
+  cloud(330, 170, 1.1); cloud(1270, 120, .9); cloud(1500, 300, .6); cloud(560, 330, .5);
+
+  // Water: flat blue
+  ctx.fillStyle = '#8ec3df'; ctx.fillRect(left, HORIZON - 1, right - left, bottom - HORIZON + 1);
+
+  // Sun streak: pale yellow dashes under the sun, flowing toward us
+  ctx.strokeStyle = '#fff1b8'; ctx.lineCap = 'round';
+  for (const g of glints) {
+    if (!reduceMotion) g.z += dt * .12 * (.25 + g.z);
+    if (g.z > 1) { g.z -= 1; g.u = rand(-1, 1); }
+    const z = g.z, y = HORIZON + 6 + (IH - HORIZON) * z * z;
+    ctx.lineWidth = 2 + 5 * z;
+    const x = SUN.x + g.u * (6 + 70 * z);
+    ctx.beginPath(); ctx.moveTo(x - (8 + 50 * z), y); ctx.lineTo(x + (8 + 50 * z), y); ctx.stroke();
+  }
+
+  // Wave squiggles fanning out from the vanishing point
+  ctx.strokeStyle = '#ffffff';
+  for (const m of marks) {
+    if (!reduceMotion) m.z += dt * .1 * (.2 + m.z);
+    if (m.z > 1.05) { m.z -= 1.05; m.u = rand(-1, 1); }
+    const z = m.z, y = HORIZON + 4 + (IH - HORIZON) * z * z;
+    const x = VX + m.u * (40 + 1500 * z * z);
+    ctx.globalAlpha = Math.min(1, z * 6) * .9;
+    ctx.lineWidth = .8 + 3.5 * z;
+    squiggle(x, y, (10 + 90 * z) * m.w, 1 + 7 * z);
+  }
+  ctx.globalAlpha = 1;
+
+  // Land on top (banks, trees, hills) hides the water and sun where they meet it
+  ctx.drawImage(land, 0, 0, IW, IH);
+}
 
 // ---------- Otter puppet ----------
 const otter = document.getElementById('otter'), tail = document.getElementById('tail'), spokes = document.getElementById('wheel');
@@ -156,7 +191,7 @@ function pickAct(now){ const k = Object.keys(ACTS); act = ACTS[k[Math.floor(Math
 
 function frame(ms){
   const t = reduceMotion ? 0 : ms / 1000;
-  gl.uniform1f(U('t'), t); gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+  drawWorld(t);
 
   // The world bobs gently (we are in the boat, so the boat stays still and the world moves).
   canvas.style.transform = `translateY(${Math.sin(t*.8)*4}px) rotate(${Math.sin(t*.53)*.25}deg)`;
