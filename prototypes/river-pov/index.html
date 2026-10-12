@@ -17,64 +17,39 @@
 <!-- Foreground: the boat, wheel and otter. Bottom-anchored so phones keep the boat and crop the sides. -->
 <svg id="boat" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
   <defs>
-    <clipPath id="deckClip"><path d="M300 900 L880 724 L1520 900 Z"/></clipPath>
-    <!-- Comic-style hatching for shade, like the otter sheet and Natural Habitat Shorts -->
-    <pattern id="hatch" width="14" height="14" patternUnits="userSpaceOnUse" patternTransform="rotate(-35)">
-      <line x1="0" y1="0" x2="0" y2="14" stroke="#1f1a16" stroke-width="2.2"/>
-    </pattern>
     <!-- The otter cutout is split in two: body, and tail tip (so the tail can swish). -->
-    <clipPath id="bodyClip"><path d="M875 442 H1125 V711 H1075 V762 H875 Z"/></clipPath>
-    <clipPath id="tailClip"><rect x="1069" y="711" width="56" height="51"/></clipPath>
+    <clipPath id="bodyClip"><path d="M893 502 H1127 V754 H1080 V802 H893 Z"/></clipPath>
+    <clipPath id="tailClip"><rect x="1074" y="754" width="53" height="48"/></clipPath>
   </defs>
 
-  <!-- Hull and deck: a narrow boat pointing at the bow, water visible beside it -->
-  <g stroke="#1f1a16" stroke-linejoin="round" stroke-linecap="round">
-    <path d="M200 900 L880 698 L1640 900 Z" fill="#a8693a" stroke-width="5"/>
-    <path d="M200 900 L880 698 L1640 900 Z" fill="url(#hatch)" stroke="none" opacity=".3"/>
-    <path d="M300 900 L880 724 L1520 900 Z" fill="#d39a5e" stroke-width="4"/>
-    <g clip-path="url(#deckClip)" stroke-width="2.2" opacity=".75">
-      <path d="M450 900 L880 724 M620 900 L880 724 M790 900 L880 724 M960 900 L880 724 M1130 900 L880 724 M1300 900 L880 724"/>
-      <path d="M700 878 l12 -3 M1010 862 l10 2 M1210 884 l12 3 M560 892 l12 -4" stroke-width="1.8"/>
-    </g>
-    <path d="M880 698 V672" stroke-width="10"/><path d="M880 698 V672" stroke="#a8693a" stroke-width="5"/>
-    <!-- coiled rope -->
-    <g fill="#e3c48d" stroke-width="3">
-      <ellipse cx="560" cy="866" rx="50" ry="17"/><ellipse cx="560" cy="864" rx="36" ry="12"/><ellipse cx="560" cy="862" rx="22" ry="7"/>
-    </g>
-    <!-- the message bottle, lying on deck -->
-    <g transform="rotate(-14 700 862)" stroke-width="3">
-      <rect x="652" y="850" width="74" height="26" rx="12" fill="#cfe9e4"/>
-      <rect x="664" y="856" width="44" height="14" rx="3" fill="#f4ecd8" stroke-width="2"/>
-      <rect x="724" y="855" width="20" height="16" rx="4" fill="#cfe9e4"/>
-      <rect x="742" y="856" width="12" height="14" rx="3" fill="#b07a45"/>
-    </g>
-  </g>
+  <!-- The boat: ChatGPT's first-person bow, cut out (rope and message bottle are on its deck) -->
+  <image href="assets/boat-v1.png" x="0" y="-8" width="1600" height="908"/>
 
-  <!-- Ship's wheel, seen from behind the otter -->
-  <path d="M992 565 H1008 V772 H992 Z" fill="#6b4428" stroke="#1f1a16" stroke-width="3.5"/>
+  <!-- Wheel post and ship's wheel, seen from behind the otter -->
+  <path d="M1002 640 H1018 V810 H1002 Z" fill="#6b4428" stroke="#1f1a16" stroke-width="3.5"/>
   <g id="wheel" stroke="#1f1a16" stroke-linecap="round">
     <g fill="#6b4428" stroke-width="3.5">
-      <rect x="995" y="420" width="10" height="290" rx="5" transform="rotate(0 1000 565)"/>
-      <rect x="995" y="420" width="10" height="290" rx="5" transform="rotate(45 1000 565)"/>
-      <rect x="995" y="420" width="10" height="290" rx="5" transform="rotate(90 1000 565)"/>
-      <rect x="995" y="420" width="10" height="290" rx="5" transform="rotate(135 1000 565)"/>
+      <rect x="1005" y="510" width="10" height="260" rx="5" transform="rotate(0 1010 640)"/>
+      <rect x="1005" y="510" width="10" height="260" rx="5" transform="rotate(45 1010 640)"/>
+      <rect x="1005" y="510" width="10" height="260" rx="5" transform="rotate(90 1010 640)"/>
+      <rect x="1005" y="510" width="10" height="260" rx="5" transform="rotate(135 1010 640)"/>
     </g>
-    <circle cx="1000" cy="565" r="118" fill="none" stroke-width="20"/>
-    <circle cx="1000" cy="565" r="118" fill="none" stroke="#6b4428" stroke-width="12"/>
-    <circle cx="1000" cy="565" r="18" fill="#6b4428" stroke-width="3.5"/>
+    <circle cx="1010" cy="640" r="105" fill="none" stroke-width="19"/>
+    <circle cx="1010" cy="640" r="105" fill="none" stroke="#6b4428" stroke-width="11"/>
+    <circle cx="1010" cy="640" r="16" fill="#6b4428" stroke-width="3.5"/>
   </g>
 
-  <!-- Stool -->
+  <!-- Stool, standing on the deck -->
   <g stroke="#1f1a16" stroke-linejoin="round" stroke-linecap="round">
-    <path d="M935 772 L927 840 M1065 772 L1073 840 M962 772 L958 830 M1038 772 L1042 830" stroke-width="13"/>
-    <path d="M935 772 L927 840 M1065 772 L1073 840 M962 772 L958 830 M1038 772 L1042 830" stroke="#b07a45" stroke-width="7"/>
-    <rect x="918" y="756" width="164" height="20" rx="5" fill="#b07a45" stroke-width="4"/>
+    <path d="M948 814 L940 876 M1072 814 L1080 876 M974 814 L970 866 M1046 814 L1050 866" stroke-width="13"/>
+    <path d="M948 814 L940 876 M1072 814 L1080 876 M974 814 L970 866 M1046 814 L1050 866" stroke="#b07a45" stroke-width="7"/>
+    <rect x="932" y="798" width="156" height="19" rx="5" fill="#b07a45" stroke-width="4"/>
   </g>
 
   <!-- Otter (code puppet: breathe, sway, tail swish, little random acts) -->
   <g id="otter">
-    <image id="tail" href="assets/otter-v3-back.png" x="875" y="442" width="250" height="320" clip-path="url(#tailClip)"/>
-    <image id="body" href="assets/otter-v3-back.png" x="875" y="442" width="250" height="320" clip-path="url(#bodyClip)"/>
+    <image id="tail" href="assets/otter-v3-back.png" x="893" y="502" width="234" height="300" clip-path="url(#tailClip)"/>
+    <image id="body" href="assets/otter-v3-back.png" x="893" y="502" width="234" height="300" clip-path="url(#bodyClip)"/>
   </g>
 </svg>
 
@@ -194,15 +169,26 @@ function drawWorld(t){
 
 // ---------- Otter puppet ----------
 const otter = document.getElementById('otter'), tail = document.getElementById('tail'), spokes = document.getElementById('wheel');
-const FEET = [1000, 762], TAIL_ROOT = [1075, 740], WHEEL = [1000, 565];
+const FEET = [1010, 802], TAIL_ROOT = [1080, 780], WHEEL = [1010, 640];
 // Random little acts. Each returns lean (deg), shift (px), wheel turn (deg), wiggle, tail lift for a time 0..1.
 const ease = x => x < .5 ? 2*x*x : 1 - Math.pow(-2*x + 2, 2) / 2;
 const hold = (x, a = .25, b = .75) => x < a ? ease(x/a) : x > b ? ease((1 - x)/(1 - b)) : 1;
 const ACTS = {
   lookAtBirds: { dur: 3.2, f: x => ({ lean: -5 * hold(x), shift: -8 * hold(x), wheel: 0, wiggle: 0, tail: 4 * hold(x) }) },
   steer:       { dur: 2.6, f: x => ({ lean: 2.5 * Math.sin(x*Math.PI*2), shift: 0, wheel: 28 * Math.sin(x*Math.PI*2), wiggle: 0, tail: 0 }) },
-  scratch:     { dur: 1.8, f: x => ({ lean: 0, shift: 0, wheel: 0, wiggle: 2.2 * Math.sin(x*Math.PI*14) * hold(x, .1, .9), tail: 10 * hold(x, .1, .9) }) },
 };
+// Pose-swap acts: extra drawings of the same otter, swapped in during the act.
+// An act only joins the rotation once all of its frames have loaded.
+const POSE_ACTS = {
+  scratchButt: { dur: 2.4, frames: ['assets/otter-v3-scratch-1.png', 'assets/otter-v3-scratch-2.png'], every: .18 },
+};
+const bodyImg = document.getElementById('body'), REST = bodyImg.getAttribute('href');
+for (const [name, pa] of Object.entries(POSE_ACTS)) {
+  Promise.all(pa.frames.map(src => new Promise((ok, no) => { const i = new Image(); i.onload = ok; i.onerror = no; i.src = src; })))
+    .then(() => { ACTS[name] = { dur: pa.dur, frames: pa.frames, every: pa.every,
+      f: x => ({ lean: 0, shift: 0, wheel: 0, wiggle: x > .15 && x < .85 ? .8 * Math.sin(x * 40) : 0, tail: 6 * hold(x, .1, .9) }) }; })
+    .catch(() => {});
+}
 let act = null, actStart = 0, nextAct = 3;
 function pickAct(now){ const k = Object.keys(ACTS); act = ACTS[k[Math.floor(Math.random()*k.length)]]; actStart = now; }
 
@@ -217,6 +203,9 @@ function frame(ms){
   if (!reduceMotion) {
     if (!act && t > nextAct) pickAct(t);
     if (act) { const x = (t - actStart) / act.dur; if (x >= 1) { act = null; nextAct = t + 4 + Math.random()*5; } else p = act.f(x); }
+    let pose = REST;
+    if (act && act.frames) { const x = (t - actStart) / act.dur; if (x > .12 && x < .88) pose = act.frames[Math.floor((t - actStart) / act.every) % act.frames.length]; }
+    if (bodyImg.getAttribute('href') !== pose) { bodyImg.setAttribute('href', pose); tail.setAttribute('href', pose); }
   }
   const breathe = 1 + Math.sin(t*2.1) * .012;
   const sway = Math.sin(t*.8) * 1.1 + p.lean + p.wiggle;
