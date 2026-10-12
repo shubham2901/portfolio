@@ -17,7 +17,7 @@
 <!-- Foreground: the boat, wheel and otter. Bottom-anchored so phones keep the boat and crop the sides. -->
 <svg id="boat" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
   <defs>
-    <clipPath id="deckClip"><path d="M40 800 L580 728 L800 708 L1020 728 L1560 800 L1560 900 L40 900 Z"/></clipPath>
+    <clipPath id="deckClip"><path d="M300 900 L880 724 L1520 900 Z"/></clipPath>
     <!-- Comic-style hatching for shade, like the otter sheet and Natural Habitat Shorts -->
     <pattern id="hatch" width="14" height="14" patternUnits="userSpaceOnUse" patternTransform="rotate(-35)">
       <line x1="0" y1="0" x2="0" y2="14" stroke="#1f1a16" stroke-width="2.2"/>
@@ -27,19 +27,31 @@
     <clipPath id="tailClip"><rect x="1069" y="711" width="56" height="51"/></clipPath>
   </defs>
 
-  <!-- Hull rail and deck, in black ink with flat colour -->
+  <!-- Hull and deck: a narrow boat pointing at the bow, water visible beside it -->
   <g stroke="#1f1a16" stroke-linejoin="round" stroke-linecap="round">
-    <path d="M-60 700 L560 690 L800 676 L1040 690 L1660 700 L1660 900 L-60 900 Z" fill="#a8693a" stroke-width="5"/>
-    <path d="M-60 742 L560 704 L800 690 L1040 704 L1660 742 L1660 760 L1040 716 L800 700 L560 716 L-60 760 Z" fill="url(#hatch)" stroke="none" opacity=".55"/>
-    <path d="M40 800 L580 728 L800 708 L1020 728 L1560 800 L1560 900 L40 900 Z" fill="#d39a5e" stroke-width="4.5"/>
-    <g clip-path="url(#deckClip)" stroke-width="2.4" opacity=".8">
-      <path d="M150 900 L800 708 M400 900 L800 708 M650 900 L800 708 M950 900 L800 708 M1200 900 L800 708 M1450 900 L800 708"/>
-      <!-- a few nail dots and grain ticks, hand-drawn feel -->
-      <path d="M520 860 l14 -4 M760 820 l10 -3 M1080 850 l14 4 M1300 870 l12 4 M300 880 l14 -5" stroke-width="2"/>
+    <path d="M200 900 L880 698 L1640 900 Z" fill="#a8693a" stroke-width="5"/>
+    <path d="M200 900 L880 698 L1640 900 Z" fill="url(#hatch)" stroke="none" opacity=".3"/>
+    <path d="M300 900 L880 724 L1520 900 Z" fill="#d39a5e" stroke-width="4"/>
+    <g clip-path="url(#deckClip)" stroke-width="2.2" opacity=".75">
+      <path d="M450 900 L880 724 M620 900 L880 724 M790 900 L880 724 M960 900 L880 724 M1130 900 L880 724 M1300 900 L880 724"/>
+      <path d="M700 878 l12 -3 M1010 862 l10 2 M1210 884 l12 3 M560 892 l12 -4" stroke-width="1.8"/>
+    </g>
+    <path d="M880 698 V672" stroke-width="10"/><path d="M880 698 V672" stroke="#a8693a" stroke-width="5"/>
+    <!-- coiled rope -->
+    <g fill="#e3c48d" stroke-width="3">
+      <ellipse cx="560" cy="866" rx="50" ry="17"/><ellipse cx="560" cy="864" rx="36" ry="12"/><ellipse cx="560" cy="862" rx="22" ry="7"/>
+    </g>
+    <!-- the message bottle, lying on deck -->
+    <g transform="rotate(-14 700 862)" stroke-width="3">
+      <rect x="652" y="850" width="74" height="26" rx="12" fill="#cfe9e4"/>
+      <rect x="664" y="856" width="44" height="14" rx="3" fill="#f4ecd8" stroke-width="2"/>
+      <rect x="724" y="855" width="20" height="16" rx="4" fill="#cfe9e4"/>
+      <rect x="742" y="856" width="12" height="14" rx="3" fill="#b07a45"/>
     </g>
   </g>
 
   <!-- Ship's wheel, seen from behind the otter -->
+  <path d="M992 565 H1008 V772 H992 Z" fill="#6b4428" stroke="#1f1a16" stroke-width="3.5"/>
   <g id="wheel" stroke="#1f1a16" stroke-linecap="round">
     <g fill="#6b4428" stroke-width="3.5">
       <rect x="995" y="420" width="10" height="290" rx="5" transform="rotate(0 1000 565)"/>
@@ -54,16 +66,15 @@
 
   <!-- Stool -->
   <g stroke="#1f1a16" stroke-linejoin="round" stroke-linecap="round">
-    <path d="M915 772 L905 838 M1085 772 L1095 838 M950 772 L946 828 M1050 772 L1054 828" stroke-width="13"/>
-    <path d="M915 772 L905 838 M1085 772 L1095 838 M950 772 L946 828 M1050 772 L1054 828" stroke="#b07a45" stroke-width="7"/>
-    <rect x="896" y="756" width="208" height="22" rx="5" fill="#b07a45" stroke-width="4"/>
-    <path d="M910 772 H1090" stroke-width="2" opacity=".6"/>
+    <path d="M935 772 L927 840 M1065 772 L1073 840 M962 772 L958 830 M1038 772 L1042 830" stroke-width="13"/>
+    <path d="M935 772 L927 840 M1065 772 L1073 840 M962 772 L958 830 M1038 772 L1042 830" stroke="#b07a45" stroke-width="7"/>
+    <rect x="918" y="756" width="164" height="20" rx="5" fill="#b07a45" stroke-width="4"/>
   </g>
 
   <!-- Otter (code puppet: breathe, sway, tail swish, little random acts) -->
   <g id="otter">
-    <image id="tail" href="assets/otter-back.png" x="875" y="442" width="250" height="320" clip-path="url(#tailClip)"/>
-    <image id="body" href="assets/otter-back.png" x="875" y="442" width="250" height="320" clip-path="url(#bodyClip)"/>
+    <image id="tail" href="assets/otter-v3-back.png" x="875" y="442" width="250" height="320" clip-path="url(#tailClip)"/>
+    <image id="body" href="assets/otter-v3-back.png" x="875" y="442" width="250" height="320" clip-path="url(#bodyClip)"/>
   </g>
 </svg>
 
@@ -82,7 +93,7 @@ const INK = '#1f1a16';
 
 const land = new Image();
 land.onload = () => requestAnimationFrame(frame);
-land.src = 'assets/land.png';
+land.src = 'assets/land-v1.png';
 
 let view = { s: 1, ox: 0, oy: 0 };
 function resize(){
@@ -102,8 +113,9 @@ addEventListener('resize', resize); resize();
 
 // Wave marks: little white squiggles that start near the horizon and slide toward the boat.
 const rand = (a, b) => a + Math.random() * (b - a);
-const marks = Array.from({ length: 170 }, () => ({ z: Math.random(), u: rand(-1, 1), w: rand(.7, 1.3) }));
-const glints = Array.from({ length: 26 }, () => ({ z: Math.random(), u: rand(-1, 1) }));
+const marks = Array.from({ length: 48 }, () => ({ z: Math.random(), u: rand(-1, 1), w: rand(.7, 1.4) }));
+// sun streak: fixed rows of short strokes under the sun that shimmer in place
+const ROWS = Array.from({ length: 9 }, (_, i) => ({ d: (i + 1) / 10, ph: Math.random() * 6.3, n: 1 + (i % 3) }));
 
 function squiggle(x, y, len, amp){
   ctx.beginPath(); ctx.moveTo(x - len / 2, y);
@@ -147,27 +159,32 @@ function drawWorld(t){
   // Water: flat blue
   ctx.fillStyle = '#8ec3df'; ctx.fillRect(left, HORIZON - 1, right - left, bottom - HORIZON + 1);
 
-  // Sun streak: pale yellow dashes under the sun, flowing toward us
-  ctx.strokeStyle = '#fff1b8'; ctx.lineCap = 'round';
-  for (const g of glints) {
-    if (!reduceMotion) g.z += dt * .12 * (.25 + g.z);
-    if (g.z > 1) { g.z -= 1; g.u = rand(-1, 1); }
-    const z = g.z, y = HORIZON + 6 + (IH - HORIZON) * z * z;
-    ctx.lineWidth = 2 + 5 * z;
-    const x = SUN.x + g.u * (6 + 70 * z);
-    ctx.beginPath(); ctx.moveTo(x - (8 + 50 * z), y); ctx.lineTo(x + (8 + 50 * z), y); ctx.stroke();
+  // Sun streak: rows of short pale strokes under the sun that shimmer in place, not flow
+  ctx.strokeStyle = '#fff3c4'; ctx.lineCap = 'round';
+  for (const r of ROWS) {
+    const y = HORIZON + 8 + (IH - HORIZON) * .55 * r.d * r.d;
+    const half = 8 + 60 * r.d;
+    ctx.lineWidth = 2 + 4 * r.d;
+    for (let k = 0; k < r.n; k++) {
+      const a = .45 + .45 * Math.sin(t * 1.6 + r.ph + k * 2.1);
+      const off = (k - (r.n - 1) / 2) * half * 1.3 + Math.sin(t * .9 + r.ph + k) * 4;
+      ctx.globalAlpha = Math.max(0, a);
+      ctx.beginPath(); ctx.moveTo(SUN.x + off - half / 2, y); ctx.lineTo(SUN.x + off + half / 2, y); ctx.stroke();
+    }
   }
+  ctx.globalAlpha = 1;
 
-  // Wave squiggles fanning out from the vanishing point
+  // Wave lines: a few long, gentle white strokes drifting slowly toward the boat
   ctx.strokeStyle = '#ffffff';
   for (const m of marks) {
-    if (!reduceMotion) m.z += dt * .1 * (.2 + m.z);
+    if (!reduceMotion) m.z += dt * .035 * (.3 + m.z);
     if (m.z > 1.05) { m.z -= 1.05; m.u = rand(-1, 1); }
-    const z = m.z, y = HORIZON + 4 + (IH - HORIZON) * z * z;
-    const x = VX + m.u * (40 + 1500 * z * z);
-    ctx.globalAlpha = Math.min(1, z * 6) * .9;
-    ctx.lineWidth = .8 + 3.5 * z;
-    squiggle(x, y, (10 + 90 * z) * m.w, 1 + 7 * z);
+    const z = m.z, y = HORIZON + 6 + (IH - HORIZON) * z * z;
+    const x = VX + m.u * (30 + 1300 * z * z);
+    if (Math.abs(x - SUN.x) < 40 + 60 * z) continue;   // leave the sun streak clear
+    ctx.globalAlpha = Math.min(1, z * 5) * .85;
+    ctx.lineWidth = 1.2 + 4 * z;
+    squiggle(x, y, (24 + 150 * z) * m.w, .6 + 4 * z);
   }
   ctx.globalAlpha = 1;
 
