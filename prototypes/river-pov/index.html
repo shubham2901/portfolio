@@ -80,7 +80,9 @@ void main(){
   float ra = res.x/res.y, ia = isz.x/isz.y;
   vec2 uv = s;
   // on tall screens the sun sits left of centre, so the otter (right of centre) doesn't hide it
-  if (ra > ia) { uv.y = (s.y - .5) * ia/ra + .5; } else { uv.x = (s.x - .3) * ra/ia + SUNX; }
+  // (clamped so the crop never runs past the painting's edge on near-16:9 screens)
+  if (ra > ia) { uv.y = (s.y - .5) * ia/ra + .5; }
+  else { float k = ra/ia; float a = clamp(.3, (SUNX + k - 1.0)/k, SUNX/k); uv.x = (s.x - a) * k + SUNX; }
   float glint = 0.0;
   if (uv.y > HORIZON) {
     float d = uv.y - HORIZON;
